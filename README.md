@@ -28,7 +28,7 @@ To have S3Proxy automatically start and stop around your tests
 ```
 startS3Proxy <<= startS3Proxy.dependsOn(compile in Test)
 test in Test <<= (test in Test).dependsOn(startS3Proxy)
-testOptions in Test += Tests.Cleanup(() => stopS3Proxy.value)
+test in Test <<= (test in Test, stopS3Proxy) { (test, stop) => test doFinally stop }
 ```
 
 To download the S3Proxy jar to a specific location ("s3-proxy" is the default)
