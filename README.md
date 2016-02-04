@@ -10,7 +10,7 @@ Installation
 Add the following to your `project/plugins.sbt` file:
 
 ```
-addSbtPlugin("com.localytics" % "sbt-s3" % "1.0")
+addSbtPlugin("com.localytics" % "sbt-s3" % "0.1")
 ```
 
 sbt 0.13.6+ is supported, 0.13.5 should work with the right bintray resolvers
