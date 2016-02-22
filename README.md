@@ -10,7 +10,7 @@ Installation
 Add the following to your `project/plugins.sbt` file:
 
 ```
-addSbtPlugin("com.localytics" % "sbt-s3" % "0.1")
+addSbtPlugin("com.localytics" % "sbt-s3" % "0.2.0")
 ```
 
 sbt 0.13.6+ is supported, 0.13.5 should work with the right bintray resolvers
@@ -41,6 +41,12 @@ To specify a port other than the default `8001`
 
 ```
 s3ProxyPort := 8081
+```
+
+To override the default JVM heap size (specified in MB)
+
+```
+s3ProxyHeapSize := Some(1024)
 ```
 
 To change the directory for the S3Proxy data ("s3-proxy" is the default)

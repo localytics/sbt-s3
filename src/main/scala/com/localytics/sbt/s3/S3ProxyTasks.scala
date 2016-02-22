@@ -27,9 +27,11 @@ object S3ProxyTasks {
       }
   }
 
-  def startS3ProxyTask = (downloadS3Proxy, s3ProxyDownloadDir, s3ProxyDownloadFile, s3ProxyPort, s3ProxyDataDir, streams) map {
-    case (_, downloadDir, downloadFile, port, dataDir, streamz) =>
+  def startS3ProxyTask = (downloadS3Proxy, s3ProxyDownloadDir, s3ProxyDownloadFile,
+                          s3ProxyPort, s3ProxyHeapSize, s3ProxyDataDir, streams) map {
+    case (_, downloadDir, downloadFile, port, heapSize, dataDir, streamz) =>
       val args = Seq("java") ++
+        heapSize.map(mb => Seq(s"-Xms${mb}m", s"-Xmx${mb}m")).getOrElse(Nil) ++
         Seq("-Djclouds.provider=filesystem") ++
         Seq("-Djclouds.identity=identity") ++
         Seq("-Djclouds.credential=credential") ++

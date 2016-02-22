@@ -12,6 +12,7 @@ object S3ProxyKeys {
   lazy val s3ProxyDownloadDir = settingKey[File]("The directory the S3Proxy file will be downloaded to. Defaults to s3-proxy.")
   lazy val s3ProxyDownloadFile = settingKey[String]("The name of the S3Proxy file. Defaults to s3-proxy-{version}.")
   lazy val s3ProxyPort = settingKey[Int]("The port number that S3Proxy will use to communicate with your application. Defaults to 8000.")
+  lazy val s3ProxyHeapSize = settingKey[Option[Int]]("The size of the heap for S3Proxy. Defaults to the JVM default.")
   lazy val s3ProxyDataDir = settingKey[String]("The directory where S3Proxy will write its data files. Defaults to s3-proxy.")
   lazy val s3ProxyCleanAfterStop = settingKey[Boolean]("Clean the local data directory after S3Proxy shutdown. Defaults to true.")
 
