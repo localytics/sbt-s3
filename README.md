@@ -43,6 +43,12 @@ To specify a port other than the default `8001`
 s3ProxyPort := 8081
 ```
 
+To override the default JVM heap size (specified in MB)
+
+```
+s3ProxyHeapSize := Some(1024)
+```
+
 To change the directory for the S3Proxy data ("s3-proxy" is the default)
 
 ```

@@ -21,6 +21,7 @@ object S3ProxyPlugin extends AutoPlugin {
     s3ProxyDownloadUrl := s"https://github.com/andrewgaul/s3proxy/releases/download/s3proxy-${s3ProxyVersion.value}/s3proxy",
     s3ProxyDownloadFile := s"s3proxy-${s3ProxyVersion.value}",
     s3ProxyPort := 8001,
+    s3ProxyHeapSize := None,
     s3ProxyDataDir := "s3-proxy/data",
     s3ProxyCleanAfterStop := true,
     downloadS3Proxy <<= downloadS3ProxyTask,
