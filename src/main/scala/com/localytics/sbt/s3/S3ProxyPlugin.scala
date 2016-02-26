@@ -16,7 +16,7 @@ object S3ProxyPlugin extends AutoPlugin {
 
   // inject project settings http://www.scala-sbt.org/0.13/docs/Plugins.html#projectSettings+and+buildSettings
   override lazy val projectSettings = Seq(
-    s3ProxyVersion := "1.4.0",
+    s3ProxyVersion := "1.3.0",
     s3ProxyDownloadDir := file("s3-proxy"),
     s3ProxyDownloadUrl := s"https://github.com/andrewgaul/s3proxy/releases/download/s3proxy-${s3ProxyVersion.value}/s3proxy",
     s3ProxyDownloadFile := s"s3proxy-${s3ProxyVersion.value}",
