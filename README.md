@@ -31,6 +31,12 @@ test in Test <<= (test in Test).dependsOn(startS3Proxy)
 test in Test <<= (test in Test, stopS3Proxy) { (test, stop) => test doFinally stop }
 ```
 
+To set the version of the S3Proxy jar to download ("1.3.0" is the default)
+
+```
+s3ProxyVersion := "1.3.0"
+```
+
 To download the S3Proxy jar to a specific location ("s3-proxy" is the default)
 
 ```
@@ -59,6 +65,25 @@ The default on stop is to cleanup any data directory if specified. This can be c
 
 ```
 s3ProxyCleanAfterStop := false
+```
+
+The authorization type can either be set to `none` in which case all requests are accepted or `aws-v2` in which case
+requests must include a key/secret pair matching `s3ProxyIdentity`/`s3ProxyCredential`. `none` is the default.
+
+```
+s3ProxyAuthorization := "none"
+```
+
+The identity is the AWS key allowed to access the S3Proxy when `s3ProxyAuthorization` is set to `aws-v2`. Defaults to `identity`.
+
+```
+s3ProxyIdentity := "identity"
+```
+
+The credential is the AWS secret key allowed to access the S3Proxy when `s3ProxyAuthorization` is set to `aws-v2`. Defaults to `credential`.
+
+```
+s3ProxyCredential := "credential"
 ```
 
 Thanks
