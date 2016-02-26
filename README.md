@@ -67,6 +67,25 @@ The default on stop is to cleanup any data directory if specified. This can be c
 s3ProxyCleanAfterStop := false
 ```
 
+The authorization type can either be set to `none` in which case all requests are accepted or `aws-v2` in which case
+requests must include a key/secret pair matching `s3ProxyIdentity`/`s3ProxyCredential`. `none` is the default.
+
+```
+s3ProxyAuthorization := "none"
+```
+
+The identity is the AWS key allowed to access the S3Proxy when `s3ProxyAuthorization` is set to `aws-v2`. Defaults to `identity`.
+
+```
+s3ProxyIdentity := "identity"
+```
+
+The credential is the AWS secret key allowed to access the S3Proxy when `s3ProxyAuthorization` is set to `aws-v2`. Defaults to `credential`.
+
+```
+s3ProxyCredential := "credential"
+```
+
 Thanks
 ------
 

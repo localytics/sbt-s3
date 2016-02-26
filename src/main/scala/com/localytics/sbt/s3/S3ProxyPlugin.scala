@@ -24,6 +24,9 @@ object S3ProxyPlugin extends AutoPlugin {
     s3ProxyHeapSize := None,
     s3ProxyDataDir := "s3-proxy/data",
     s3ProxyCleanAfterStop := true,
+    s3ProxyAuthorization := "none",
+    s3ProxyIdentity := "identity",
+    s3ProxyCredential := "credential",
     downloadS3Proxy <<= downloadS3ProxyTask,
     startS3Proxy <<= startS3ProxyTask,
     stopS3Proxy <<= stopS3ProxyTask

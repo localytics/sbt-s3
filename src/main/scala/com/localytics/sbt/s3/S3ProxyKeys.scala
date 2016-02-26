@@ -16,6 +16,10 @@ object S3ProxyKeys {
   lazy val s3ProxyDataDir = settingKey[String]("The directory where S3Proxy will write its data files. Defaults to s3-proxy.")
   lazy val s3ProxyCleanAfterStop = settingKey[Boolean]("Clean the local data directory after S3Proxy shutdown. Defaults to true.")
 
+  lazy val s3ProxyAuthorization = settingKey[String]("Authorization type for S3Proxy. Allowed values are 'none' and 'aws-v2'. Defaults to none.")
+  lazy val s3ProxyIdentity = settingKey[String]("The AWS Key for the allowed user. Only relevant when Authorization is not 'none'. Defaults to identity.")
+  lazy val s3ProxyCredential = settingKey[String]("The AWS Secret Key for the allowed user. Only relevant when Authorization is not 'none'. Defaults to credential.")
+
   lazy val downloadS3Proxy = TaskKey[Unit]("download-s3-proxy")
   lazy val startS3Proxy = TaskKey[Unit]("start-s3-proxy")
   lazy val stopS3Proxy = TaskKey[Unit]("stop-s3-proxy")
