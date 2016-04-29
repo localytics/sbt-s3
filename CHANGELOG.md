@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.0] - 2016-04-28
+- Change test cleanup to support testOnly
+
 ## [0.3.0] - 2016-02-26
 - Change default S3Proxy version to 1.3.0
 - Add config options for Authorization, Identity, and Credential
