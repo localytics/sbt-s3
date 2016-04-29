@@ -60,19 +60,27 @@ object S3ProxyTasks {
   }
 
   def stopS3ProxyTask = (streams, s3ProxyDataDir, s3ProxyCleanAfterStop) map {
-    case (streamz, dataDir, clean) =>
-      extractS3ProxyPid("jps".!!) match {
-        case Some(pid) =>
-          streamz.log.info("Stopping S3Proxy")
-          killPidCommand(pid).!
-        case None =>
-          streamz.log.warn("Cannot find S3Proxy PID")
-      }
-      if (clean) {
-        streamz.log.info("Cleaning S3Proxy")
-        val dir = new File(dataDir)
-        if (dir.exists()) sbt.IO.delete(dir)
-      }
+    case (streamz, dataDir, clean) => stopS3ProxyHelper(streamz, dataDir, clean)
+  }
+
+
+  def s3ProxyTestCleanupTask = (streams, s3ProxyDataDir, s3ProxyCleanAfterStop) map {
+    case (streamz, dataDir, clean) => Tests.Cleanup(() => stopS3ProxyHelper(streamz, dataDir, clean))
+  }
+
+  def stopS3ProxyHelper(streamz: Keys.TaskStreams, dataDir: String, clean: Boolean) = {
+    extractS3ProxyPid("jps".!!) match {
+      case Some(pid) =>
+        streamz.log.info("Stopping S3Proxy")
+        killPidCommand(pid).!
+      case None =>
+        streamz.log.warn("Cannot find S3Proxy PID")
+    }
+    if (clean) {
+      streamz.log.info("Cleaning S3Proxy")
+      val dir = new File(dataDir)
+      if (dir.exists()) sbt.IO.delete(dir)
+    }
   }
 
 }

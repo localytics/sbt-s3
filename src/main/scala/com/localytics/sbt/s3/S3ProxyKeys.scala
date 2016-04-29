@@ -23,4 +23,5 @@ object S3ProxyKeys {
   lazy val downloadS3Proxy = TaskKey[Unit]("download-s3-proxy")
   lazy val startS3Proxy = TaskKey[Unit]("start-s3-proxy")
   lazy val stopS3Proxy = TaskKey[Unit]("stop-s3-proxy")
+  lazy val s3ProxyTestCleanup = TaskKey[Tests.Cleanup]("s3-proxy-test-cleanup")
 }
