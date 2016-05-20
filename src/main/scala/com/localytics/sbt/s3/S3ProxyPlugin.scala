@@ -29,6 +29,7 @@ object S3ProxyPlugin extends AutoPlugin {
     s3ProxyCredential := "credential",
     downloadS3Proxy <<= downloadS3ProxyTask,
     startS3Proxy <<= startS3ProxyTask,
-    stopS3Proxy <<= stopS3ProxyTask
+    stopS3Proxy <<= stopS3ProxyTask,
+    s3ProxyTestCleanup <<= s3ProxyTestCleanupTask
   )
 }

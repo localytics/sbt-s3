@@ -10,7 +10,7 @@ Installation
 Add the following to your `project/plugins.sbt` file:
 
 ```
-addSbtPlugin("com.localytics" % "sbt-s3" % "0.2.0")
+addSbtPlugin("com.localytics" % "sbt-s3" % "0.4.0")
 ```
 
 sbt 0.13.6+ is supported, 0.13.5 should work with the right bintray resolvers
@@ -28,7 +28,8 @@ To have S3Proxy automatically start and stop around your tests
 ```
 startS3Proxy <<= startS3Proxy.dependsOn(compile in Test)
 test in Test <<= (test in Test).dependsOn(startS3Proxy)
-test in Test <<= (test in Test, stopS3Proxy) { (test, stop) => test doFinally stop }
+testOptions in Test <+= s3ProxyTestCleanup
+testOnly in Test <<= (testOnly in Test).dependsOn(startS3Proxy)
 ```
 
 To set the version of the S3Proxy jar to download ("1.3.0" is the default)
