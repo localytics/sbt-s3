@@ -40,7 +40,6 @@ object S3ProxyTasks {
         Seq(s"-Ds3proxy.authorization=$authorization") ++
         Seq(s"-Djclouds.filesystem.basedir=$dataDir") ++
         Seq(s"-Ds3proxy.endpoint=http://127.0.0.1:$port") ++
-        Seq(s"-Ds3proxy.secure-endpoint=https://127.0.0.1:$port") ++
         Seq("-jar", new File(downloadDir, downloadFile).getAbsolutePath) ++
         Seq("--properties", "/dev/null")
 
