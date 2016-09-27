@@ -27,20 +27,36 @@ object S3ProxyTasks {
       }
   }
 
-  def startS3ProxyTask = (downloadS3Proxy, s3ProxyDownloadDir, s3ProxyDownloadFile,
-                          s3ProxyPort, s3ProxyHeapSize, s3ProxyDataDir,
-                          s3ProxyAuthorization, s3ProxyIdentity, s3ProxyCredential, streams) map {
-    case (_, downloadDir, downloadFile, port, heapSize, dataDir,
-            authorization, identity, credential, streamz) =>
+  def startS3ProxyTask = (downloadS3Proxy, s3ProxyDownloadDir, s3ProxyDownloadFile, s3ProxyPort,
+    s3ProxyHeapSize, s3ProxyDataDir, s3ProxyAuthorization, s3ProxyKeyStore, streams) map {
+    case (_, downloadDir, downloadFile, port, heapSize, dataDir, authorization, keyStoreOpt, streamz) =>
+
+      val httpsArgs = keyStoreOpt.map { ks =>
+        Seq(
+          s"-Ds3proxy.keystore-path=${ks.path}",
+          s"-Ds3proxy.keystore-password=${ks.pass}",
+          s"-Ds3proxy.secure-endpoint=http://127.0.0.1:$port"
+        )
+      }
+
+      val authArgs = authorization match {
+        case NoAuth =>
+          Seq("-Ds3proxy.authorization=none")
+        case AwsV2Auth(identity, credential) =>
+          Seq(
+            "-Ds3proxy.authorization=aws-v2",
+            s"-Ds3proxy.identity=$identity",
+            s"-Ds3proxy.credential=$credential"
+          )
+      }
+
       val args = Seq("java") ++
         heapSize.map(mb => Seq(s"-Xms${mb}m", s"-Xmx${mb}m")).getOrElse(Nil) ++
         Seq("-Djclouds.provider=filesystem") ++
-        Seq(s"-Djclouds.identity=$identity") ++
-        Seq(s"-Djclouds.credential=$credential") ++
-        Seq(s"-Ds3proxy.authorization=$authorization") ++
         Seq(s"-Djclouds.filesystem.basedir=$dataDir") ++
         Seq(s"-Ds3proxy.endpoint=http://127.0.0.1:$port") ++
-        Seq(s"-Ds3proxy.secure-endpoint=https://127.0.0.1:$port") ++
+        httpsArgs.getOrElse(Nil) ++
+        authArgs ++
         Seq("-jar", new File(downloadDir, downloadFile).getAbsolutePath) ++
         Seq("--properties", "/dev/null")
 
