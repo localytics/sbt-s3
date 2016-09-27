@@ -22,9 +22,7 @@ object S3ProxyTasks {
         streamz.log.info(s"Downloading S3Proxy from [$url] to [${outputFile.getAbsolutePath}]")
         (new URL(url) #> outputFile).!!
       }
-      if (!outputFile.exists()) {
-        sys.error(s"Cannot find S3Proxy file at [${outputFile.getAbsolutePath}]")
-      }
+      if (!validJar(outputFile)) sys.error(s"Invalid jar file at [${outputFile.getAbsolutePath}]")
   }
 
   def startS3ProxyTask = (downloadS3Proxy, s3ProxyDownloadDir, s3ProxyDownloadFile, s3ProxyPort,
