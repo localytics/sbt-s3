@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.0] - 2016-09-27
+- Upgrade to 1.5.0-prerelease
+- Add config for KeyStore, necessary for HTTPS support.
+- Disable HTTPS by default.
+- Traits / Case Classes for KeyStore and Authorization config.
+- Test for invalid jar files
+
 ## [0.4.0] - 2016-04-28
 - Change test cleanup to support testOnly
 

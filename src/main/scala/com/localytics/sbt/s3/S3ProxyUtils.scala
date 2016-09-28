@@ -1,5 +1,8 @@
 package com.localytics.sbt.s3
 
+import java.io.File
+import java.util.zip.ZipFile
+
 import scala.util.Try
 
 private[s3] object S3ProxyUtils {
@@ -27,4 +30,5 @@ private[s3] object S3ProxyUtils {
     }
   }
 
+  def validJar(file: File): Boolean = Try(new ZipFile(file)).isSuccess
 }

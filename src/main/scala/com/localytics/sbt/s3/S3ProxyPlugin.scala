@@ -4,8 +4,6 @@ import com.localytics.sbt.s3.S3ProxyKeys._
 import com.localytics.sbt.s3.S3ProxyTasks._
 import sbt._
 
-import scala.concurrent.duration._
-
 object S3ProxyPlugin extends AutoPlugin {
 
   // auto enable plugin http://www.scala-sbt.org/0.13/docs/Plugins.html#Root+plugins+and+triggered+plugins
@@ -16,7 +14,7 @@ object S3ProxyPlugin extends AutoPlugin {
 
   // inject project settings http://www.scala-sbt.org/0.13/docs/Plugins.html#projectSettings+and+buildSettings
   override lazy val projectSettings = Seq(
-    s3ProxyVersion := "1.3.0",
+    s3ProxyVersion := "1.5.0-prerelease",
     s3ProxyDownloadDir := file("s3-proxy"),
     s3ProxyDownloadUrl := s"https://github.com/andrewgaul/s3proxy/releases/download/s3proxy-${s3ProxyVersion.value}/s3proxy",
     s3ProxyDownloadFile := s"s3proxy-${s3ProxyVersion.value}",
@@ -24,9 +22,8 @@ object S3ProxyPlugin extends AutoPlugin {
     s3ProxyHeapSize := None,
     s3ProxyDataDir := "s3-proxy/data",
     s3ProxyCleanAfterStop := true,
-    s3ProxyAuthorization := "none",
-    s3ProxyIdentity := "identity",
-    s3ProxyCredential := "credential",
+    s3ProxyAuthorization := NoAuth,
+    s3ProxyKeyStore := None,
     downloadS3Proxy <<= downloadS3ProxyTask,
     startS3Proxy <<= startS3ProxyTask,
     stopS3Proxy <<= stopS3ProxyTask,
