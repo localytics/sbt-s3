@@ -10,7 +10,7 @@ Installation
 Add the following to your `project/plugins.sbt` file:
 
 ```
-addSbtPlugin("com.localytics" % "sbt-s3" % "0.4.0")
+addSbtPlugin("com.localytics" % "sbt-s3" % "0.6.0")
 ```
 
 sbt 0.13.6+ is supported, 0.13.5 should work with the right bintray resolvers
@@ -32,10 +32,10 @@ testOptions in Test <+= s3ProxyTestCleanup
 testOnly in Test <<= (testOnly in Test).dependsOn(startS3Proxy)
 ```
 
-To set the version of the S3Proxy jar to download ("1.3.0" is the default)
+To set the version of the S3Proxy jar to download ("1.5.0" is the default)
 
 ```
-s3ProxyVersion := "1.3.0"
+s3ProxyVersion := "1.5.0"
 ```
 
 To download the S3Proxy jar to a specific location ("s3-proxy" is the default)
