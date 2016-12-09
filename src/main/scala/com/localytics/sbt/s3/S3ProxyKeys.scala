@@ -24,8 +24,8 @@ object S3ProxyKeys {
 
   lazy val s3ProxyKeyStore = settingKey[Option[KeyStore]]("KeyStore information required for HTTPS endpoint. Defaults to None.")
 
-  lazy val downloadS3Proxy = TaskKey[Unit]("download-s3-proxy")
-  lazy val startS3Proxy = TaskKey[Unit]("start-s3-proxy")
+  lazy val downloadS3Proxy = TaskKey[File]("download-s3-proxy")
+  lazy val startS3Proxy = TaskKey[String]("start-s3-proxy")
   lazy val stopS3Proxy = TaskKey[Unit]("stop-s3-proxy")
   lazy val s3ProxyTestCleanup = TaskKey[Tests.Cleanup]("s3-proxy-test-cleanup")
 }
