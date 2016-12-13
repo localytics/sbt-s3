@@ -5,7 +5,7 @@ import java.io.File
 import sbt._
 
 object S3ProxyKeys {
-  lazy val s3ProxyVersion = settingKey[String]("S3Proxy version to download. Defaults to 1.3.0.")
+  lazy val s3ProxyVersion = settingKey[String]("S3Proxy version to download. Defaults to 1.5.1.")
   lazy val s3ProxyDownloadUrl = settingKey[String]("URL to download the S3Proxy file from.")
   lazy val s3ProxyDownloadDir = settingKey[File]("The directory the S3Proxy file will be downloaded to. Defaults to s3-proxy.")
   lazy val s3ProxyDownloadFile = settingKey[String]("The name of the S3Proxy file. Defaults to s3-proxy-{version}.")
