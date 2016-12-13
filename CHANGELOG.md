@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [0.7.0] - 2016-12-13
+- Refactor to best practices and SBT 1.0 syntax
+
 ## [0.6.1] - 2016-11-16
 - Upgrade to version 1.5.1 of s3Proxy
 

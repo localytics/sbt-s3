@@ -1,7 +1,7 @@
 package com.localytics.sbt.s3
 
 import com.localytics.sbt.s3.S3ProxyKeys._
-import com.localytics.sbt.s3.S3ProxyTasks._
+import sbt.Keys._
 import sbt._
 
 object S3ProxyPlugin extends AutoPlugin {
@@ -24,9 +24,11 @@ object S3ProxyPlugin extends AutoPlugin {
     s3ProxyCleanAfterStop := true,
     s3ProxyAuthorization := NoAuth,
     s3ProxyKeyStore := None,
-    downloadS3Proxy <<= downloadS3ProxyTask,
-    startS3Proxy <<= startS3ProxyTask,
-    stopS3Proxy <<= stopS3ProxyTask,
-    s3ProxyTestCleanup <<= s3ProxyTestCleanupTask
+
+    downloadS3Proxy := DownloadS3Proxy(s3ProxyVersion.value, s3ProxyDownloadUrl.value, s3ProxyDownloadDir.value, s3ProxyDownloadFile.value, streams.value),
+    startS3Proxy := StartS3Proxy(s3ProxyDownloadDir.value, s3ProxyDownloadFile.value, s3ProxyPort.value, s3ProxyHeapSize.value, s3ProxyDataDir.value, s3ProxyAuthorization.value, s3ProxyKeyStore.value, streams.value),
+    stopS3Proxy := StopS3Proxy(streams.value, s3ProxyDataDir.value, s3ProxyCleanAfterStop.value),
+    s3ProxyTestCleanup := Tests.Cleanup(() => StopS3Proxy(streams.value, s3ProxyDataDir.value, s3ProxyCleanAfterStop.value)),
+    startS3Proxy := startS3Proxy.dependsOn(downloadS3Proxy).value
   )
 }
