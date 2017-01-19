@@ -2,7 +2,6 @@ package com.localytics.sbt.s3
 
 import java.io.File
 
-import com.localytics.sbt.PidUtils
 import com.localytics.sbt.s3.S3ProxyKeys.Authorization
 import com.localytics.sbt.s3.S3ProxyKeys.AwsV2Auth
 import com.localytics.sbt.s3.S3ProxyKeys.KeyStore

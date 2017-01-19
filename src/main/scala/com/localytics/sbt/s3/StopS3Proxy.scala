@@ -1,6 +1,5 @@
 package com.localytics.sbt.s3
 
-import com.localytics.sbt.PidUtils
 import sbt.File
 import sbt.Keys.TaskStreams
 import sbt._

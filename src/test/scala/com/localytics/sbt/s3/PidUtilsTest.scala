@@ -1,4 +1,4 @@
-package com.localytics.sbt
+package com.localytics.sbt.s3
 
 import org.scalatest.FunSpec
 import org.scalatest.Matchers

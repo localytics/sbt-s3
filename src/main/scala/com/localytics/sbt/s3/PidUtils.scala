@@ -1,4 +1,4 @@
-package com.localytics.sbt
+package com.localytics.sbt.s3
 
 object PidUtils {
 
