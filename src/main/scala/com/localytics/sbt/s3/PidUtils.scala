@@ -4,7 +4,7 @@ object PidUtils {
 
   private val ProcessIDRegex = """\d+ .*s3proxy""".r
 
-  def extractS3ProxyPid(input: String): Option[String] = ProcessIDRegex.findFirstIn(input).map(_.split(" ")(0))
+  def extractPid(input: String): Option[String] = ProcessIDRegex.findFirstIn(input).map(_.split(" ")(0))
 
   def osName: String = System.getProperty("os.name") match {
     case n: String if !n.isEmpty => n

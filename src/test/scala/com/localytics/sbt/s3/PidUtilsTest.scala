@@ -15,7 +15,7 @@ class PidUtilsTest extends FunSpec with Matchers {
           |72451
           |76364 /Users/person/code/repository/aws-mocks/s3/s3proxy-1.5.1
         """.stripMargin
-      PidUtils.extractS3ProxyPid(jpsOutput) should equal(Some("76364"))
+      PidUtils.extractPid(jpsOutput) should equal(Some("76364"))
     }
 
   }

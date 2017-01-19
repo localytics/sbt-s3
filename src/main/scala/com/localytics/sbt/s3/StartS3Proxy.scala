@@ -35,7 +35,7 @@ object StartS3Proxy {
         Thread.sleep(500)
       } while (!isS3ProxyRunning(port))
     }
-    PidUtils.extractS3ProxyPid("jps -l".!!).getOrElse {
+    PidUtils.extractPid("jps -l".!!).getOrElse {
       sys.error(s"Cannot find S3Proxy PID")
     }
   }
