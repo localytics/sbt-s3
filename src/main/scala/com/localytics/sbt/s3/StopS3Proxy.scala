@@ -1,6 +1,5 @@
 package com.localytics.sbt.s3
 
-import com.localytics.sbt.PidUtils
 import sbt.File
 import sbt.Keys.TaskStreams
 import sbt._
@@ -8,7 +7,7 @@ import sbt._
 object StopS3Proxy {
 
   def apply(streamz: TaskStreams, dataDir: String, clean: Boolean) = {
-    PidUtils.extractS3ProxyPid("jps -l".!!) match {
+    PidUtils.extractPid("jps -l".!!) match {
       case Some(pid) =>
         streamz.log.info("Stopping S3Proxy")
         PidUtils.killPidCommand(pid).!
