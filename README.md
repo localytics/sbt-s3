@@ -87,6 +87,36 @@ The credential is the AWS secret key allowed to access the S3Proxy when `s3Proxy
 s3ProxyCredential := "credential"
 ```
 
+Scopes
+------
+
+By default this plugin lives entirely in the `Global` scope. However, different settings for different scopes is possible. For instance, you can add the plugin to the `Test` scope using
+
+```
+inConfig(Test)(baseS3ProxySettings)
+```
+
+You can then adjust the settings within the `Test` scope using
+
+```
+(s3ProxyDownloadDir in Test) := file("in-test/s3-proxy")
+```
+
+and you can execute the plugin tasks within the `Test` scope using
+
+```
+sbt test:start-s3-proxy
+```
+
+Similarly, you can have the plugin automatically start and stop around your tests using
+
+```
+startS3Proxy in Test := (startS3Proxy in Test).dependsOn(compile in Test).value
+test in Test := (test in Test).dependsOn(startS3Proxy in Test).value
+testOnly in Test := (testOnly in Test).dependsOn(startS3Proxy in Test).value
+testOptions in Test += (s3ProxyTestCleanup in Test).value
+```
+
 Thanks
 ------
 
