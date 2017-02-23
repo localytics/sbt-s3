@@ -26,10 +26,10 @@ Configuration
 To have S3Proxy automatically start and stop around your tests
 
 ```
-startS3Proxy <<= startS3Proxy.dependsOn(compile in Test)
-test in Test <<= (test in Test).dependsOn(startS3Proxy)
-testOptions in Test <+= s3ProxyTestCleanup
-testOnly in Test <<= (testOnly in Test).dependsOn(startS3Proxy)
+startS3Proxy := startS3Proxy.dependsOn(compile in Test).value
+test in Test := (test in Test).dependsOn(startS3Proxy).value
+testOnly in Test := (testOnly in Test).dependsOn(startS3Proxy).value
+testOptions in Test += s3ProxyTestCleanup.value
 ```
 
 To set the version of the S3Proxy jar to download ("1.5.1" is the default)
