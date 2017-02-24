@@ -10,7 +10,7 @@ Installation
 Add the following to your `project/plugins.sbt` file:
 
 ```
-addSbtPlugin("com.localytics" % "sbt-s3" % "0.7.1")
+addSbtPlugin("com.localytics" % "sbt-s3" % "0.7.2")
 ```
 
 sbt 0.13.6+ is supported, 0.13.5 should work with the right bintray resolvers
@@ -26,10 +26,10 @@ Configuration
 To have S3Proxy automatically start and stop around your tests
 
 ```
-startS3Proxy <<= startS3Proxy.dependsOn(compile in Test)
-test in Test <<= (test in Test).dependsOn(startS3Proxy)
-testOptions in Test <+= s3ProxyTestCleanup
-testOnly in Test <<= (testOnly in Test).dependsOn(startS3Proxy)
+startS3Proxy := startS3Proxy.dependsOn(compile in Test).value
+test in Test := (test in Test).dependsOn(startS3Proxy).value
+testOnly in Test := (testOnly in Test).dependsOn(startS3Proxy).value
+testOptions in Test += s3ProxyTestCleanup.value
 ```
 
 To set the version of the S3Proxy jar to download ("1.5.1" is the default)
@@ -85,6 +85,36 @@ The credential is the AWS secret key allowed to access the S3Proxy when `s3Proxy
 
 ```
 s3ProxyCredential := "credential"
+```
+
+Scopes
+------
+
+By default this plugin lives entirely in the `Global` scope. However, different settings for different scopes is possible. For instance, you can add the plugin to the `Test` scope using
+
+```
+inConfig(Test)(baseS3ProxySettings)
+```
+
+You can then adjust the settings within the `Test` scope using
+
+```
+(s3ProxyDownloadDir in Test) := file("in-test/s3-proxy")
+```
+
+and you can execute the plugin tasks within the `Test` scope using
+
+```
+sbt test:start-s3-proxy
+```
+
+Similarly, you can have the plugin automatically start and stop around your tests using
+
+```
+startS3Proxy in Test := (startS3Proxy in Test).dependsOn(compile in Test).value
+test in Test := (test in Test).dependsOn(startS3Proxy in Test).value
+testOnly in Test := (testOnly in Test).dependsOn(startS3Proxy in Test).value
+testOptions in Test += (s3ProxyTestCleanup in Test).value
 ```
 
 Thanks
