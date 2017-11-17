@@ -2,7 +2,7 @@ package com.localytics.sbt.s3
 
 import sbt.File
 import sbt.Keys.TaskStreams
-import sbt._
+import scala.sys.process._
 
 object StopS3Proxy {
 

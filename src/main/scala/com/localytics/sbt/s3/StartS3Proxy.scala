@@ -7,8 +7,7 @@ import com.localytics.sbt.s3.S3ProxyKeys.AwsV2Auth
 import com.localytics.sbt.s3.S3ProxyKeys.KeyStore
 import com.localytics.sbt.s3.S3ProxyKeys.NoAuth
 import sbt.Keys.TaskStreams
-import sbt.Process
-import sbt._
+import scala.sys.process._
 
 import scala.util.Try
 
