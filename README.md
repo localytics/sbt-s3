@@ -3,17 +3,24 @@ sbt-s3
 
 Support for running [S3Proxy](https://github.com/andrewgaul/s3proxy) in tests.
 
-[![MIT license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](LICENSE) 
+[![MIT license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](LICENSE)
+[ ![Download](https://api.bintray.com/packages/localytics/sbt-plugins/sbt-s3/images/download.svg) ](https://bintray.com/localytics/sbt-plugins/sbt-s3/_latestVersion)
 
 Installation
 ------------
-Add the following to your `project/plugins.sbt` file:
+For sbt 1.0+, use version `1.0.0` in your `project/plugins.sbt` file:
+```
+addSbtPlugin("com.localytics" % "sbt-s3" % "1.0.0")
+```
+
+
+For sbt 0.13.6+, use version `0.7.2`:
 
 ```
 addSbtPlugin("com.localytics" % "sbt-s3" % "0.7.2")
 ```
 
-sbt 0.13.6+ is supported, 0.13.5 should work with the right bintray resolvers
+Version `0.7.2` should also work with sbt 0.13.5 with the right bintray resolvers
 
 Usage
 -----
@@ -28,14 +35,14 @@ To have S3Proxy automatically start and stop around your tests
 ```
 startS3Proxy := startS3Proxy.dependsOn(compile in Test).value
 test in Test := (test in Test).dependsOn(startS3Proxy).value
-testOnly in Test := (testOnly in Test).dependsOn(startS3Proxy).value
+testOnly in Test := (testOnly in Test).dependsOn(startS3Proxy).evaluated
 testOptions in Test += s3ProxyTestCleanup.value
 ```
 
-To set the version of the S3Proxy jar to download ("1.5.1" is the default)
+To set the version of the S3Proxy jar to download ("1.5.3" is the default)
 
 ```
-s3ProxyVersion := "1.5.1"
+s3ProxyVersion := "1.5.3"
 ```
 
 To download the S3Proxy jar to a specific location ("s3-proxy" is the default)
@@ -113,7 +120,7 @@ Similarly, you can have the plugin automatically start and stop around your test
 ```
 startS3Proxy in Test := (startS3Proxy in Test).dependsOn(compile in Test).value
 test in Test := (test in Test).dependsOn(startS3Proxy in Test).value
-testOnly in Test := (testOnly in Test).dependsOn(startS3Proxy in Test).value
+testOnly in Test := (testOnly in Test).dependsOn(startS3Proxy in Test).evaluated
 testOptions in Test += (s3ProxyTestCleanup in Test).value
 ```
 
