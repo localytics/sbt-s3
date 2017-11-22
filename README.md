@@ -3,7 +3,8 @@ sbt-s3
 
 Support for running [S3Proxy](https://github.com/andrewgaul/s3proxy) in tests.
 
-[![MIT license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](LICENSE) 
+[![MIT license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](LICENSE)
+[ ![Download](https://api.bintray.com/packages/localytics/sbt-plugins/sbt-s3/images/download.svg) ](https://bintray.com/localytics/sbt-plugins/sbt-s3/_latestVersion)
 
 Installation
 ------------
